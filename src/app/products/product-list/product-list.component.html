@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="card-header">
+    <h2>{{pageTitle}}</h2>
+  </div>
+  <div class="card-body">
+    <button class="btn btn-primary add-btn" [routerLink] = "['/products/create']">New Product</button>
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+            <tr>
+              <th>Product Id</th>
+              <th>Product Name</th>
+              <th>Product Code</th>
+              <th>Product Image</th>
+              <th>Product price</th>
+              <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr *ngFor= "let product of products let i = index">
+                <td>{{i + 1}}</td>
+                <td><a [routerLink]="['/products', product.productId]">{{product.productName}}</a></td>
+                <td>{{product.productCode}}</td>
+                <td><img [src]="product.productImage" [style.width.px]="50" /></td>
+                <td>{{product.productPrice}}</td>
+                <td><button class="btn btn-primary edit-btn" [routerLink]="['/products/edit',product.productId]">Edit</button>
+                <button class="btn btn-danger"
+                  mwlConfirmationPopover
+                  [popoverTitle] = 'popoverTitle'
+                  [popoverMessage] = 'popoverMessage'
+                  placement="left"
+                  (confirm)="deleteProduct(product.productId)"
+                  (cancel) = 'cancelClicked = true'>Delete</button></td>
+              </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
